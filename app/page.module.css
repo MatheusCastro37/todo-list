@@ -1,0 +1,96 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 900px;
+    max-width: 500px;
+    height: 515px;
+}
+
+.login{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 50px 20px;
+}
+
+.iconLogin{
+    top: 50px;
+    z-index: 100;
+    position: relative;
+    color: transparent;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #e4f2fd;
+    filter: drop-shadow(0 5px 10px #808080);
+}
+
+.img_login{
+    display: none;
+    border-radius: 15px 0 0 15px;
+}
+
+.title{
+    margin-bottom: 5px;
+}
+
+.form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.label{
+    font-weight: bold;
+    margin: 30px 0 10px 0;
+}
+
+.btn{
+    border: none;
+    background-color: #2198f2;
+    color: #FFFFFF;
+    padding: 10px 0;
+    margin-top: 30px;
+    border-radius: 30px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    filter: opacity(0.7);
+}
+
+.createUser{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.link{
+    margin-left: 10px;
+    color: #2198f2;
+}
+
+@media only screen and (min-width: 1000px) {
+    .main{
+        flex-direction: row;
+        max-width: 1000px;
+    }
+
+    .iconLogin{
+        display: none;
+    }
+
+    .login{
+        height: 515px;
+        border-radius: 0 15px 15px 0;
+    }
+
+    .img_login{
+        display: block;
+    }
+}
