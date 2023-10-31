@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "^5.14.12",
     "@mui/material": "^5.14.12",
+    "@tanstack/react-query": "^5.0.5",
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
