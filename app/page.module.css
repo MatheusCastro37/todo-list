@@ -50,6 +50,11 @@
     margin: 30px 0 10px 0;
 }
 
+.errorForm{
+    color: #FF0000;
+    margin-top: 5px;
+}
+
 .btn{
     border: none;
     background-color: #2198f2;
