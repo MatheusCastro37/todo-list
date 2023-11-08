@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
+import { useQuery } from '@tanstack/react-query';
+
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
 
@@ -20,12 +22,27 @@ export default function FormLogin() {
         resolver: yupResolver(schema)
     });
 
-    function onSubmit(d) {
-        console.log(d)
+    const { data } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            return await fetch('http://localhost:3333').then((res) => res.json())
+        }
+    })
+
+    async function verifyUser(dataForm){
+        const verifiedUsers = data.filter((e) => dataForm.email === e.user_email && dataForm.password === e.user_password)
+        console.log(verifiedUsers.length)
+
+        if(verifiedUsers.length === 0){
+            alert("usuario ano existe!")
+        }else{
+            alert("usuario ja existe!")
+        }
+
     }
 
     return(<>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <form onSubmit={handleSubmit(verifyUser)} className={styles.form}>
 
             <label className={styles.label}>E-MAIL:</label>
             <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
