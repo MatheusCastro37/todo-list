@@ -1,0 +1,46 @@
+.container{
+    width: 90vw;
+    background-color: #e4f2fd;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.firstLayer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.quit,
+.todoList li svg:last-child{
+    color: #ff0000;
+}
+
+.todoList{
+    list-style: none;
+}
+
+.todoList li{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    height: 50px;
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.todoList li p{
+    width: 100%;
+}
+
+.todoList li svg:first-child{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    color: #FFFFFF;
+    margin: 0 10px;
+}
