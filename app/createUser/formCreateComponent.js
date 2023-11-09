@@ -2,12 +2,22 @@
 
 import styles from "./page.module.css";
 
+import { useQuery, useMutation } from '@tanstack/react-query';
+
 import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function FormCreate() {
+
+    const { data } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            return fetch('http://localhost:3333/createUser').then((res) => res.json())
+        }
+    })
+
     const schema = yup.object({
         name: yup.string().required(),
         email: yup.string().email().required(),
@@ -25,9 +35,32 @@ export default function FormCreate() {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = data => console.log(data);
-
     const passwordConfirmation = watch('password')
+
+    const mutation = useMutation({
+        mutationFn: async (newUser) => {
+            await fetch('http://localhost:3333/createUser', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+        }
+    })
+
+    const onSubmit = (dataForm) => {
+
+        const verifiedUsers = data.filter(e => e.user_email === dataForm.email)
+        
+        if(verifiedUsers.length === 0) {
+            mutation.mutate(dataForm)
+        }else{
+            alert('Este email ja esta cadastro!')
+        }
+
+    }
 
     return(<>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
