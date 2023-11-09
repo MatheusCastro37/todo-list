@@ -35,7 +35,7 @@ export default function FormLogin() {
         if(verifiedUsers.length === 0){
             alert("usuario nao existe!")
         }else{
-            window.open(`todoList/${verifiedUsers[0].user_id}`)
+            window.open(`todoList/${verifiedUsers[0].user_id}`, '_self')
         }
 
     }

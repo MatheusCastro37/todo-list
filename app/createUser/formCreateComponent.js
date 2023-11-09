@@ -56,6 +56,7 @@ export default function FormCreate() {
         
         if(verifiedUsers.length === 0) {
             mutation.mutate(dataForm)
+            window.open('/', '_self')
         }else{
             alert('Este email ja esta cadastro!')
         }
