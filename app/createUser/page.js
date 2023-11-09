@@ -3,6 +3,14 @@ import FormCreate from './formCreateComponent';
 
 import Link from "next/link";
 
+export const metadata = {
+    title: 'Lista de Tarefas - Criar',
+    description: 'Crie uma nova conta e crie suas tarefas!',
+    icons: {
+      icon: './icon.ico',
+    }
+  }
+
 export default function CreateUser() {
 
     return(<>
