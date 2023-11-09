@@ -31,12 +31,11 @@ export default function FormLogin() {
 
     async function verifyUser(dataForm){
         const verifiedUsers = data.filter((e) => dataForm.email === e.user_email && dataForm.password === e.user_password)
-        console.log(verifiedUsers.length)
 
         if(verifiedUsers.length === 0){
-            alert("usuario ano existe!")
+            alert("usuario nao existe!")
         }else{
-            alert("usuario ja existe!")
+            window.open(`todoList/${verifiedUsers[0].user_id}`)
         }
 
     }
