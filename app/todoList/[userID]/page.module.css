@@ -19,6 +19,10 @@
 }
 
 .todoList{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
 }
 
@@ -26,6 +30,7 @@
     display: flex;
     align-items: center;
     margin: 15px 0;
+    width: 100%;
     height: 50px;
     background-color: #FFFFFF;
     padding: 5px;

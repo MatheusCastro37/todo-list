@@ -9,44 +9,31 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function TodoList({ user }) {
 
-    const { data } = useQuery({
+    const { data, isPending } = useQuery({
         queryKey: ['todos'],
         queryFn: async () => {
             return await fetch(`http://localhost:3333/todoList/${user}`).then(res => res.json())
         }
     })
-    
-    console.log(data)
 
     return(<>
         <section>
             <ul className={styles.todoList}>
                 
-                <li>
-                    <CheckCircleOutlineIcon/>
-                    <p>Tarefa 1</p>
-                    <DeleteIcon/>
-                </li>
-                <li>
-                    <CheckCircleOutlineIcon/>
-                    <p>Tarefa 2</p>
-                    <DeleteIcon/>
-                </li>
-                <li>
-                    <CheckCircleOutlineIcon/>
-                    <p>Tarefa 3</p>
-                    <DeleteIcon/>
-                </li>
-                <li>
-                    <CheckCircleOutlineIcon/>
-                    <p>Tarefa 4</p>
-                    <DeleteIcon/>
-                </li>
-                <li>
-                    <CheckCircleOutlineIcon/>
-                    <p>Tarefa 5</p>
-                    <DeleteIcon/>
-                </li>
+                {
+                    isPending ?
+                    <p>Carregando...</p> :
+                    data.map(e => {
+                        return(<>
+                            <li>
+                                <CheckCircleOutlineIcon/>
+                                <p>{e.todo_name}</p>
+                                <DeleteIcon/>
+                            </li>
+                        </>)
+                    })
+                }
+
             </ul>
         </section>
     </>)
