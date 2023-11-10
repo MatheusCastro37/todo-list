@@ -1,6 +1,8 @@
 import styles from './page.module.css';
 import TodoList from './todoListComponent';
 
+import AddIcon from '@mui/icons-material/Add';
+
 export default function TodoPage({ params }) {
 
     return(<>
@@ -11,6 +13,10 @@ export default function TodoPage({ params }) {
             </section>
 
             <TodoList user={params.userID}/>
+
+            <section className={styles.addTodo}>
+                <button><AddIcon /></button>
+            </section>
 
         </main>
     </>)
