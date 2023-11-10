@@ -4,6 +4,7 @@ import styles from './page.module.css';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -22,7 +23,9 @@ export default function TodoList({ user }) {
                 
                 {
                     isPending ?
-                    <p>Carregando...</p> :
+                    <div className={styles.loading}>
+                        <CircularProgress />
+                    </div> :
                     data.map(e => {
                         return(<>
                             <li>

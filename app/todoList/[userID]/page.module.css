@@ -50,3 +50,13 @@
     color: #FFFFFF;
     margin: 0 10px;
 }
+
+.loading{
+    width: 70px;
+    height: 70px;
+    border-radius: 15px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
