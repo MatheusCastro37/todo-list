@@ -62,9 +62,12 @@
 }
 
 .addTodo{
+    top: 88%;
+    position: fixed;
+    width: 90vw;
     margin-top: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .addTodo > button{
@@ -85,4 +88,58 @@
 .addTodo > button > svg{
     width: 30px;
     height: 30px;
+}
+
+.addTodoModal{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 67%;
+    width: 90vw;
+    background-color: #e4f2fd;
+    height: 200px;
+    border-radius: 10px;
+    max-width: 650px;
+}
+
+.addTodoModal > svg{
+    margin: 10px;
+}
+
+.addTodoModal > label{
+    padding: 10px 0 5px 30px;
+}
+
+.addTodoModal > input{
+    margin: 0 30px;
+    padding: 5px;
+}
+
+.btnGroup{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btnGroup button{
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+    background: transparent;
+    border: none;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 1px #888888;
+}
+
+.btnGroup button:first-child svg{
+    color: #00FF00;
+}
+
+.btnGroup button:last-child svg{
+    color: #FF0000;
 }
