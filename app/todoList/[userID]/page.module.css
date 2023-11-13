@@ -130,6 +130,11 @@
     padding: 5px;
 }
 
+.addTodoModal > p{
+    margin: 5px 30px;
+    color: #FF0000;
+}
+
 .btnGroup{
     margin-top: 20px;
     display: flex;

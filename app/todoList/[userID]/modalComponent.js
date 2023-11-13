@@ -8,11 +8,25 @@ import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+const schema = yup.object({
+    todo: yup.string().max(100).required(),
+}).required()
+
 export default function Modal() {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false); 
+    const handleClose = () => setOpen(false);
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    })
+
+    const onSubmit = (data) => console.log(data)
 
     return(<>
         { open ?
@@ -20,10 +34,11 @@ export default function Modal() {
             <section className={styles.addTodoModal}>
                 <button onClick={handleClose}><ClearIcon /></button>
                 <label>Nome da Tarefa:</label>
-                <input placeholder='Digite uma tarefa...' />
+                <input {...register("todo")} placeholder='Digite uma tarefa...' />
+                {errors?.todo?.type === 'max' ? <p>Digite no maximo 100 caracteres!</p> : null}
 
                 <div className={styles.btnGroup}>
-                    <button>Adiconar <CheckIcon /></button>
+                    <button onClick={handleSubmit(onSubmit)}>Adiconar <CheckIcon /></button>
                     <button onClick={handleClose}>Ainda não <ClearIcon /></button>
                 </div>
             </section>
