@@ -16,16 +16,18 @@ export default function Modal() {
 
     return(<>
         { open ?
-        <section className={styles.addTodoModal}>
-            <button onClick={handleClose}><ClearIcon /></button>
-            <label>Nome da Tarefa:</label>
-            <input placeholder='Digite uma tarefa...' />
+        <div className={styles.containerAddTodoModal}>
+            <section className={styles.addTodoModal}>
+                <button onClick={handleClose}><ClearIcon /></button>
+                <label>Nome da Tarefa:</label>
+                <input placeholder='Digite uma tarefa...' />
 
-            <div className={styles.btnGroup}>
-                <button>Adiconar <CheckIcon /></button>
-                <button onClick={handleClose}>Ainda não <ClearIcon /></button>
-            </div>
-        </section>
+                <div className={styles.btnGroup}>
+                    <button>Adiconar <CheckIcon /></button>
+                    <button onClick={handleClose}>Ainda não <ClearIcon /></button>
+                </div>
+            </section>
+        </div>
         :
         null}
         <section className={styles.addTodo}>
