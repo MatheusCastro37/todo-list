@@ -16,7 +16,7 @@ export default function TodoPage({ params }) {
 
         </main>
 
-        <Modal />
+        <Modal todoUser={params.userID} />
     
     </>)
 }

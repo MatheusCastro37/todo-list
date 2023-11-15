@@ -8,25 +8,42 @@ import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
 
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { useMutation } from '@tanstack/react-query';
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 const schema = yup.object({
     todo: yup.string().max(100).required(),
 }).required()
 
-export default function Modal() {
+export default function Modal({ todoUser }) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const mutation = useMutation({
+        mutationFn: async (todo) => {
+            await fetch(`http://localhost:3333/todoList/${todoUser}`, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(todo)
+            })
+        }
+    })
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     })
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) => {
+        mutation.mutate(data)
+    }
 
     return(<>
         { open ?
