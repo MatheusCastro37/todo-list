@@ -23,7 +23,11 @@ export default function Modal({ todoUser }) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setValue('todo', '')
+        mutation.reset()
+        setOpen(false);
+    }
 
     const mutation = useMutation({
         mutationFn: async (todo) => {
@@ -38,7 +42,7 @@ export default function Modal({ todoUser }) {
         }
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, setValue ,formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     })
 
