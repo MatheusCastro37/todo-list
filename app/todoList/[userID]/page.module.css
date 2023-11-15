@@ -110,6 +110,17 @@
     max-width: 360px;
 }
 
+.addTodoModal div:last-child{
+    margin: 10px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addTodoModal div:last-child span{
+    width: 100%;
+}
+
 .addTodoModal > button{
     width: fit-content;
     background: transparent;
@@ -167,4 +178,8 @@
 
 .btnGroup button:last-child svg{
     color: #FF0000;
+}
+
+.todoSuccess{
+    color: #029902;
 }

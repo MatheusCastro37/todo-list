@@ -7,6 +7,7 @@ import styles from './page.module.css';
 import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { useMutation } from '@tanstack/react-query';
 
@@ -57,6 +58,20 @@ export default function Modal({ todoUser }) {
                 <div className={styles.btnGroup}>
                     <button onClick={handleSubmit(onSubmit)}>Adiconar <CheckIcon /></button>
                     <button onClick={handleClose}>Ainda não <ClearIcon /></button>
+                </div>
+                
+                <div>
+                    {mutation.isPending ?
+                        <>
+                            <p>adicionando tarefa...</p>
+                            <LinearProgress />
+                        </>
+                        :
+                        <>
+                            {mutation.isSuccess ? <p className={styles.todoSuccess}>tarefa adicionada!</p> : null}
+                        </>
+                    }
+                    
                 </div>
             </section>
         </div>
