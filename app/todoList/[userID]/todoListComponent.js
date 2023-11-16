@@ -10,7 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function TodoList({ user }) {
 
-    const { data, isPending } = useQuery({
+    const { data, isPending, isError, isSuccess } = useQuery({
         queryKey: ['todos'],
         queryFn: async () => {
             return await fetch(`http://localhost:3333/todoList/${user}`).then(res => res.json())
@@ -26,15 +26,23 @@ export default function TodoList({ user }) {
                     <div className={styles.loading}>
                         <CircularProgress />
                     </div> :
-                    data.map(e => {
-                        return(<>
-                            <li>
-                                <CheckCircleOutlineIcon/>
-                                <p>{e.todo_name}</p>
-                                <DeleteIcon/>
-                            </li>
-                        </>)
-                    })
+                    
+                    <>
+                    {isSuccess ? 
+                        data.map(e => {
+                            return(<>
+                                <li>
+                                    <CheckCircleOutlineIcon/>
+                                    <p>{e.todo_name}</p>
+                                    <DeleteIcon/>
+                                </li>
+                            </>)
+                        }) : null
+                    }
+
+                    {isError ? <p className={styles.errorGetTodo}>Erro ao fazer a busca de tarefas!</p> : null}
+
+                    </>
                 }
 
             </ul>

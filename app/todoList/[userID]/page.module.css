@@ -187,3 +187,7 @@
 .todoFailed{
     color: #680202;
 }
+
+.errorGetTodo{
+    color: #680202;
+}
