@@ -22,11 +22,21 @@ const schema = yup.object({
 export default function Modal({ todoUser }) {
 
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => {
+    const handleOpen = () => {
+        const lockedScroll = document.querySelector('body')
+        const lowBrightness = document.querySelector('main')
+        lockedScroll.style.overflowY = 'hidden'
+        lowBrightness.style.filter = 'brightness(0.5)'
+        setOpen(true);
+    }
+        const handleClose = () => {
         setValue('todo', '')
         mutation.reset()
         setOpen(false);
+        const unlockedScroll = document.querySelector('body')
+        const normalBrightness = document.querySelector('main')
+        unlockedScroll.style.overflowY = 'scroll'
+        normalBrightness.style.filter = 'brightness(1)'
     }
 
     const mutation = useMutation({
