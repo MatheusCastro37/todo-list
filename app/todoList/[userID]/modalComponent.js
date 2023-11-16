@@ -73,6 +73,8 @@ export default function Modal({ todoUser }) {
                         :
                         <>
                             {mutation.isSuccess ? <p className={styles.todoSuccess}>tarefa adicionada!</p> : null}
+
+                            {mutation.isError ? <p className={styles.todoFailed}>Erro ao adicionar a tarefa!</p> : null}
                         </>
                     }
                     
