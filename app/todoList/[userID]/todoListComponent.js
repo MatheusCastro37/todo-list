@@ -32,9 +32,9 @@ export default function TodoList({ user }) {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <CheckCircleOutlineIcon/>
+                                    <button><CheckCircleOutlineIcon/></button>
                                     <p>{e.todo_name}</p>
-                                    <DeleteIcon/>
+                                    <button><DeleteIcon/></button>
                                 </li>
                             </>)
                         }) : null

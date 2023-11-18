@@ -13,11 +13,6 @@
     margin-bottom: 30px;
 }
 
-.quit,
-.todoList li svg:last-child{
-    color: #ff0000;
-}
-
 .todoList{
     display: flex;
     justify-content: center;
@@ -38,17 +33,30 @@
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.todoList button{
+    display: flex;
+    border: none;
+    background: transparent;
+    margin: 0 10px;
+}
+
+.todoList button:first-child{
+    border: 1px solid #000000;
+    border-radius: 50%;
+}
+
 .todoList li p{
     width: 100%;
 }
 
-.todoList li svg:first-child{
+.todoList li button svg{
     width: 20px;
     height: 20px;
-    border: 1px solid #000000;
-    border-radius: 50%;
-    color: #FFFFFF;
-    margin: 0 10px;
+}
+
+.quit,
+.todoList li button:last-child svg{
+    color: #FF0000;
 }
 
 .loading{
@@ -168,7 +176,8 @@
 }
 
 .btnGroup button:hover,
-.addTodoModal > button:hover{
+.addTodoModal > button:hover,
+.todoList button:hover{
     cursor: pointer;
 }
 
