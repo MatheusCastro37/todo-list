@@ -2,7 +2,7 @@
 
 import styles from "./page.module.css";
 
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
@@ -10,13 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 export default function FormCreate() {
-
-    const { data } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            return fetch('http://localhost:3333/createUser').then((res) => res.json())
-        }
-    })
 
     const schema = yup.object({
         name: yup.string().required(),
@@ -51,16 +44,7 @@ export default function FormCreate() {
     })
 
     const onSubmit = (dataForm) => {
-
-        const verifiedUsers = data.filter(e => e.user_email === dataForm.email)
-        
-        if(verifiedUsers.length === 0) {
-            mutation.mutate(dataForm)
-            window.open('/', '_self')
-        }else{
-            alert('Este email ja esta cadastro!')
-        }
-
+        mutation.mutate(dataForm)
     }
 
     return(<>

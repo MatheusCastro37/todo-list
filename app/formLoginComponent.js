@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
@@ -22,26 +22,25 @@ export default function FormLogin() {
         resolver: yupResolver(schema)
     });
 
-    const { data } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            return await fetch('http://localhost:3333').then((res) => res.json())
+    const mutation = useMutation({
+        mutationFn: async (loginUser) => {
+            await fetch('http://localhost:3333', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginUser)
+            })
         }
     })
 
-    async function verifyUser(dataForm){
-        const verifiedUsers = data.filter((e) => dataForm.email === e.user_email && dataForm.password === e.user_password)
-
-        if(verifiedUsers.length === 0){
-            alert("usuario nao existe!")
-        }else{
-            window.open(`todoList/${verifiedUsers[0].user_id}`, '_self')
-        }
-
+    const onSubmit = (data) => {
+        mutation.mutate(data)
     }
 
     return(<>
-        <form onSubmit={handleSubmit(verifyUser)} className={styles.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 
             <label className={styles.label}>E-MAIL:</label>
             <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
