@@ -1,22 +1,32 @@
 import styles from './page.module.css';
 import TodoList from './todoListComponent';
 import Modal from './modalComponent';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
 
 export default function TodoPage() {
 
+    const cookieAPI = cookies().has('tokenAPI')
+
     return(<>
 
-        <main className={styles.container}>
-            <section className={styles.firstLayer}>
-                <h1>ToDo List</h1>
-                <a href='#' className={styles.quit}>Sair</a>
-            </section>
+        {
+            cookieAPI ?
+            <>
+                <main className={styles.container}>
+                    <section className={styles.firstLayer}>
+                        <h1>ToDo List</h1>
+                        <a href='#' className={styles.quit}>Sair</a>
+                    </section>
 
-            <TodoList />
+                    <TodoList />
 
-        </main>
+                </main>
 
-        <Modal />
+                <Modal />
+            </>
+            : <Link href='/'>Voltar</Link>
+        }
     
     </>)
 }
