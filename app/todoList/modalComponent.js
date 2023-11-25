@@ -19,7 +19,7 @@ const schema = yup.object({
     todo: yup.string().max(100).required(),
 }).required()
 
-export default function Modal({ todoUser }) {
+export default function Modal() {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -41,7 +41,7 @@ export default function Modal({ todoUser }) {
 
     const mutation = useMutation({
         mutationFn: async (todo) => {
-            await fetch(`http://localhost:3333/todoList/${todoUser}`, {
+            await fetch(`http://localhost:3333/todoList/`, {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',

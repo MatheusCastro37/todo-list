@@ -2,7 +2,7 @@ import styles from './page.module.css';
 import TodoList from './todoListComponent';
 import Modal from './modalComponent';
 
-export default function TodoPage({ params }) {
+export default function TodoPage() {
 
     return(<>
 
@@ -12,11 +12,11 @@ export default function TodoPage({ params }) {
                 <a href='#' className={styles.quit}>Sair</a>
             </section>
 
-            <TodoList user={params.userID}/>
+            <TodoList />
 
         </main>
 
-        <Modal todoUser={params.userID} />
+        <Modal />
     
     </>)
 }
