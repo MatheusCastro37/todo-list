@@ -55,6 +55,12 @@
     margin-top: 5px;
 }
 
+.loginError{
+    text-align: center;
+    margin-top: 35px;
+    color: #FF0000;
+}
+
 .btn{
     border: none;
     background-color: #2198f2;
