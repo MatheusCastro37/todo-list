@@ -63,7 +63,7 @@ export default function FormLogin() {
                         {
                             mutation.data === 400 ?
                                 <p className={styles.loginError}>Email ou Senha estão incorretos!</p>
-                            : <>{ mutation.data === 201 ? window.open('/todoList') : null}</>
+                            : <>{ mutation.data === 201 ? window.open('/todoList', '_self') : null}</>
                         }
                     </>
                 : null
