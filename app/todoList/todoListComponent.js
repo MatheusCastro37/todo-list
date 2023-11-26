@@ -13,7 +13,7 @@ export default function TodoList() {
     const { data, isPending, isError, isSuccess } = useQuery({
         queryKey: ['todos'],
         queryFn: async () => {
-            return await fetch(`http://localhost:3333/todoList/`).then(res => res.json())
+            return await fetch(`http://localhost:3333/todoList`, {credentials: 'include'}).then(res => res.json())
         }
     })
 

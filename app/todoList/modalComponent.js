@@ -35,18 +35,19 @@ export default function Modal() {
         setOpen(false);
         const unlockedScroll = document.querySelector('body')
         const normalBrightness = document.querySelector('main')
-        unlockedScroll.style.overflowY = 'scroll'
+        unlockedScroll.style.overflowY = 'auto'
         normalBrightness.style.filter = 'brightness(1)'
     }
 
     const mutation = useMutation({
         mutationFn: async (todo) => {
-            await fetch(`http://localhost:3333/todoList/`, {
+            await fetch(`http://localhost:3333/todoList`, {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify(todo)
             })
         }
