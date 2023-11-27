@@ -10,14 +10,24 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function TodoList() {
 
-    const { data, isPending, isError, isSuccess } = useQuery({
+    const { data, error, isPending, isError, isSuccess } = useQuery({
         queryKey: ['todos'],
         queryFn: async () => {
-            return await fetch(`http://localhost:3333/todoList`, {credentials: 'include'}).then(res => res.json())
+
+            const res = await fetch(`http://localhost:3333/todoList`, {credentials: 'include'})
+            
+            if(res.ok) {
+                const data = res.json()
+                return data
+            } else {
+                throw new Error('erro ao buscar tarefa!')
+            }
+            
         }
     })
 
     return(<>
+
         <section>
             <ul className={styles.todoList}>
                 
@@ -40,12 +50,13 @@ export default function TodoList() {
                         }) : null
                     }
 
-                    {isError ? <p className={styles.errorGetTodo}>Erro ao fazer a busca de tarefas!</p> : null}
+                    {isError ? <p className={styles.errorGetTodo}>{error.message}</p> : null}
 
                     </>
                 }
 
             </ul>
         </section>
+
     </>)
 }

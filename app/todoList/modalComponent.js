@@ -29,7 +29,8 @@ export default function Modal() {
         lowBrightness.style.filter = 'brightness(0.5)'
         setOpen(true);
     }
-        const handleClose = () => {
+
+    const handleClose = () => {
         setValue('todo', '')
         mutation.reset()
         setOpen(false);
@@ -41,7 +42,8 @@ export default function Modal() {
 
     const mutation = useMutation({
         mutationFn: async (todo) => {
-            await fetch(`http://localhost:3333/todoList`, {
+
+            const res = await fetch(`http://localhost:3333/todoList`, {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
@@ -50,6 +52,11 @@ export default function Modal() {
                 credentials: 'include',
                 body: JSON.stringify(todo)
             })
+            
+            if(res.ok === false){
+                throw new Error('Erro ao adicionar tarefa!')
+            }
+            
         }
     })
 
@@ -62,6 +69,7 @@ export default function Modal() {
     }
 
     return(<>
+
         { open ?
         <div className={styles.containerAddTodoModal}>
             <section className={styles.addTodoModal}>
@@ -85,7 +93,7 @@ export default function Modal() {
                         <>
                             {mutation.isSuccess ? <p className={styles.todoSuccess}>tarefa adicionada!</p> : null}
 
-                            {mutation.isError ? <p className={styles.todoFailed}>Erro ao adicionar a tarefa!</p> : null}
+                            {mutation.isError ? <p className={styles.todoFailed}>{mutation.error.message}</p> : null}
                         </>
                     }
                     
@@ -97,5 +105,7 @@ export default function Modal() {
         <section className={styles.addTodo}>
             <button onClick={handleOpen}><AddIcon /></button>
         </section>
+
     </>)
+
 }
