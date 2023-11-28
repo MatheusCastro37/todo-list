@@ -41,31 +41,25 @@ export default function TodoList() {
 
             if(res.ok) {
                 queryClient.invalidateQueries({ queryKey: ['todos'] })
+                alert('Tarefa deletada com sucesso!')
             } else {
-                throw new Error('Erro ao deletar tarefa!')
+                alert('Erro ao deletar tarefa!')
             }
             
         }
     })
 
-    const deleteTodo = () => {
-        
-        const buttonDel = document.querySelectorAll('.deleteBtn')
+    const deleteTodo = (e) => {
 
-        buttonDel.forEach(e => {
-            e.addEventListener('click', () => {
-                const todoID = e.id
-                mutation.mutate(todoID)
-            })
-        })
+        const btnDelete = e.target.parentElement.parentElement
+        const todoID = btnDelete.id
+
+        mutation.mutate(todoID)
 
     }
 
     return(<>
 
-        {mutation.isSuccess ? alert('Tarefa deletada com sucesso!') : null}
-        {mutation.isError ? alert('Erro ao deletar tarefas!') : null}
-    
         <section>
             <ul className={styles.todoList}>
                 
