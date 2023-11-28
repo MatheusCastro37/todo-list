@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 export default function TodoList() {
 
@@ -26,8 +26,41 @@ export default function TodoList() {
         }
     })
 
-    return(<>
+    const mutation = useMutation({
+        mutationFn: async (todoID) => {
+            const res = await fetch('http://localhost:3333/todoList', {
+                method: 'delete',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(todoID)
+            })
 
+            if(res.ok) {
+                return
+            } else {
+                throw new Error('Erro ao deletar tarefa!')
+            }
+            
+        }
+    })
+
+    const deleteTodo = () => {
+        
+        const buttonDel = document.querySelectorAll('.deleteBtn')
+
+        buttonDel.forEach(e => {
+            e.addEventListener('click', () => {
+                const todoID = e.id
+                mutation.mutate(todoID)
+            })
+        })
+
+    }
+
+    return(<>
+    
         <section>
             <ul className={styles.todoList}>
                 
@@ -38,13 +71,13 @@ export default function TodoList() {
                     </div> :
                     
                     <>
-                    {isSuccess ? 
+                    {isSuccess ?
                         data.map(e => {
                             return(<>
                                 <li>
                                     <button><CheckCircleOutlineIcon/></button>
                                     <p>{e.todo_name}</p>
-                                    <button><DeleteIcon/></button>
+                                    <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
                             </>)
                         }) : null
