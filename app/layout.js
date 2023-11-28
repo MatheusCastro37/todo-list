@@ -15,9 +15,10 @@ const roboto = Roboto({
   display: 'swap',
 })
 
-const queryClient = new QueryClient()
+export const queryClient = new QueryClient()
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="pt-br">
       <body className={roboto.className}>

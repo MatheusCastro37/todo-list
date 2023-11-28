@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import styles from './page.module.css';
 
+import { queryClient } from '../layout';
+
 import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import AddIcon from '@mui/icons-material/Add';
@@ -56,6 +58,8 @@ export default function Modal() {
             if(res.ok === false){
                 throw new Error('Erro ao adicionar tarefa!')
             }
+
+            queryClient.invalidateQueries({ queryKey: ['todos'] })
             
         }
     })

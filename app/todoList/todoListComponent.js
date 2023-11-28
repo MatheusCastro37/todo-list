@@ -2,6 +2,8 @@
 
 import styles from './page.module.css';
 
+import { queryClient } from '../layout';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -38,7 +40,7 @@ export default function TodoList() {
             })
 
             if(res.ok) {
-                return
+                queryClient.invalidateQueries({ queryKey: ['todos'] })
             } else {
                 throw new Error('Erro ao deletar tarefa!')
             }
