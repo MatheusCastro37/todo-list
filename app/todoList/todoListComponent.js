@@ -60,6 +60,9 @@ export default function TodoList() {
     }
 
     return(<>
+
+        {mutation.isSuccess ? alert('Tarefa deletada com sucesso!') : null}
+        {mutation.isError ? alert('Erro ao deletar tarefas!') : null}
     
         <section>
             <ul className={styles.todoList}>
