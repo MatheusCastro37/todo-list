@@ -2,7 +2,7 @@ import styles from './page.module.css';
 import TodoList from './todoListComponent';
 import Modal from './modalComponent';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default function TodoPage() {
 
@@ -25,7 +25,7 @@ export default function TodoPage() {
 
                 <Modal />
             </>
-            : <Link href='/'>Voltar</Link>
+            : redirect('/')
         }
     
     </>)
