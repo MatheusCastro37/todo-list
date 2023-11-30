@@ -32,7 +32,7 @@ export default function FormCreate() {
 
     const mutation = useMutation({
         mutationFn: async (newUser) => {
-            await fetch('http://localhost:3333/createUser', {
+            const res = await fetch('http://localhost:3333/createUser', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
@@ -40,6 +40,13 @@ export default function FormCreate() {
                 },
                 body: JSON.stringify(newUser)
             })
+
+            if(res.ok) {
+                return
+            } else {
+                throw new Error('Erro ao tentar criar usuario novo!')
+            }
+
         }
     })
 
@@ -63,6 +70,8 @@ export default function FormCreate() {
             <TextField {...register('passwordwatch')} id="outlined-basic" label="Digite sua Senha Novamente..." variant="outlined" />
             {errors?.passwordwatch?.type === 'typeError' ? <p>A senha precisa ser numerica</p> : null}
             {errors?.passwordwatch?.type === 'validate' ? <p>A senha não é compativel</p> : null}
+
+            {mutation.isError ? <p className={styles.errorCreate}>{mutation.error.message}</p> : null}
 
             <input className={styles.btn} type="submit" aria-label="Criar" />
 

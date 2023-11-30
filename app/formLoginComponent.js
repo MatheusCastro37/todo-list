@@ -25,7 +25,7 @@ export default function FormLogin() {
     const mutation = useMutation({
         mutationFn: async (loginUser) => {
 
-            return await fetch('http://localhost:3333', {
+            const res = await fetch('http://localhost:3333', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
@@ -34,7 +34,13 @@ export default function FormLogin() {
                 credentials: 'include',
                 body: JSON.stringify(loginUser)
             })
-            .then(res => res.status)
+
+            if(res.ok) {
+                console.log(res)
+                return
+            } else {
+                throw new Error('Erro ao tentar realizar o login.')
+            }
 
         }
     })
@@ -56,18 +62,8 @@ export default function FormLogin() {
 
             <input className={styles.btn} type='submit'/>
             <p className={styles.createUser}>Não possue conta?<Link className={styles.link} href='/createUser'>Criar Conta</Link></p>
-
-            {
-                mutation.isSuccess ?
-                    <>
-                        {
-                            mutation.data === 400 ?
-                                <p className={styles.loginError}>Email ou Senha estão incorretos!</p>
-                            : <>{ mutation.data === 201 ? window.open('/todoList', '_self') : null}</>
-                        }
-                    </>
-                : null
-            }
+            
+            {mutation.isError ? <p className={styles.loginError}>{mutation.error.message}</p> : null}
 
         </form>
     </>)
