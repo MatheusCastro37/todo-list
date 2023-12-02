@@ -45,7 +45,7 @@ export default function Modal() {
     const mutation = useMutation({
         mutationFn: async (todo) => {
 
-            const res = await fetch(`http://localhost:3333/todoList`, {
+            const res = await fetch(`https://api-todo-nodejs.onrender.com/todoList`, {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',

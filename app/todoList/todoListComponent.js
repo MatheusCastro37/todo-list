@@ -16,7 +16,7 @@ export default function TodoList() {
         queryKey: ['todos'],
         queryFn: async () => {
 
-            const res = await fetch(`http://localhost:3333/todoList`, {credentials: 'include'})
+            const res = await fetch(`https://api-todo-nodejs.onrender.com/todoList`, {credentials: 'include'})
             
             if(res.ok) {
                 const data = res.json()
@@ -30,7 +30,7 @@ export default function TodoList() {
 
     const mutation = useMutation({
         mutationFn: async (todoID) => {
-            const res = await fetch('http://localhost:3333/todoList', {
+            const res = await fetch('https://api-todo-nodejs.onrender.com/todoList', {
                 method: 'delete',
                 headers: {
                     'Accept': 'application/json',

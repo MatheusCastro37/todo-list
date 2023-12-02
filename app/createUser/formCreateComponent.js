@@ -36,7 +36,7 @@ export default function FormCreate() {
 
     const mutation = useMutation({
         mutationFn: async (newUser) => {
-            const res = await fetch('http://localhost:3333/createUser', {
+            const res = await fetch('https://api-todo-nodejs.onrender.com/createUser', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json',
