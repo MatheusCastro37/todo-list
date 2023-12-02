@@ -11,12 +11,16 @@ import { useMutation } from '@tanstack/react-query';
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
 
+import { useRouter } from 'next/navigation';
+
 const schema = yup.object({
     email: yup.string().email().required(),
     password: yup.number().required(),
 }).required();
 
 export default function FormLogin() {
+
+    const route = useRouter();
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
@@ -36,8 +40,7 @@ export default function FormLogin() {
             })
 
             if(res.ok) {
-                console.log(res)
-                return
+                route.push('/todoList')
             } else {
                 throw new Error('Erro ao tentar realizar o login.')
             }
