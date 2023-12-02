@@ -9,7 +9,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
+import { useRouter } from "next/navigation";
+
 export default function FormCreate() {
+
+    const route = useRouter();
 
     const schema = yup.object({
         name: yup.string().required(),
@@ -42,7 +46,7 @@ export default function FormCreate() {
             })
 
             if(res.ok) {
-                return
+                route.push('/')
             } else {
                 throw new Error('Erro ao tentar criar usuario novo!')
             }
