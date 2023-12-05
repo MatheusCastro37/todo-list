@@ -35,6 +35,7 @@ export default function FormLogin() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify(loginUser)
             })
 
