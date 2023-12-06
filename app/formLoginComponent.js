@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-import { useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
@@ -21,6 +21,21 @@ const schema = yup.object({
 export default function FormLogin() {
 
     const route = useRouter();
+
+    const { isError } = useQuery({
+        queryKey: ['todos'],
+        queryFn: async () => {
+
+            const res = await fetch(`https://api-todo-nodejs.onrender.com`, {credentials: 'include'})
+            
+            if(res.ok) {
+                route.push('/todoList')
+            } else {
+                throw new Error()
+            }
+            
+        }
+    })
 
     const { register, handleSubmit, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
@@ -53,21 +68,31 @@ export default function FormLogin() {
     }
 
     return(<>
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 
-            <label className={styles.label}>E-MAIL:</label>
-            <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
-            {errors?.email?.type === "required" ? <p className={styles.errorForm}>*Campo Obrigatorio</p> : null}
+        {
 
-            <label className={styles.label}>SENHA:</label>
-            <TextField {...register('password')} id="outlined-basic" label="Digite sua Senha" variant="outlined" />
-            {errors?.password?.type === "typeError" ? <p className={styles.errorForm}>*A senha precisa ser numerica</p> : null}
+            isError ?
 
-            <input className={styles.btn} type='submit'/>
-            <p className={styles.createUser}>Não possue conta?<Link className={styles.link} href='/createUser'>Criar Conta</Link></p>
-            
-            {mutation.isError ? <p className={styles.loginError}>{mutation.error.message}</p> : null}
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
 
-        </form>
+                <label className={styles.label}>E-MAIL:</label>
+                <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
+                {errors?.email?.type === "required" ? <p className={styles.errorForm}>*Campo Obrigatorio</p> : null}
+
+                <label className={styles.label}>SENHA:</label>
+                <TextField {...register('password')} id="outlined-basic" label="Digite sua Senha" variant="outlined" />
+                {errors?.password?.type === "typeError" ? <p className={styles.errorForm}>*A senha precisa ser numerica</p> : null}
+
+                <input className={styles.btn} type='submit'/>
+                <p className={styles.createUser}>Não possue conta?<Link className={styles.link} href='/createUser'>Criar Conta</Link></p>
+                
+                {mutation.isError ? <p className={styles.loginError}>{mutation.error.message}</p> : null}
+
+            </form>
+            :
+            null
+
+        }
+
     </>)
 }
