@@ -2,6 +2,14 @@ import styles from './page.module.css';
 import TodoList from './todoListComponent';
 import Modal from './modalComponent';
 
+export const metadata = {
+    title: 'Lista de Tarefas',
+    description: 'Aqui está sua lista de tarefas!',
+    icons: {
+      icon: './icon.ico',
+    }
+  }
+
 export default function TodoPage() {
 
     return(<>
