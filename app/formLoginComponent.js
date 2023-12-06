@@ -8,6 +8,7 @@ import * as yup from "yup";
 
 import { useQuery, useMutation } from '@tanstack/react-query';
 
+import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
 
@@ -90,8 +91,9 @@ export default function FormLogin() {
 
             </form>
             :
-            null
-
+            <div className={styles.checkCookie}>
+                <CircularProgress />
+            </div>
         }
 
     </>)
