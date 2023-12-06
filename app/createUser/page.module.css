@@ -26,6 +26,11 @@
     border-radius: 30px;
 }
 
+.btn:hover{
+    cursor: pointer;
+    filter: opacity(.7);
+}
+
 .login{
     color: #2198f2;
 }
