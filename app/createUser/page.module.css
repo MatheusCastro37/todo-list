@@ -14,7 +14,7 @@
 }
 
 .label{
-    margin: 15px 0 10px 0;
+    margin: 20px 0 10px 0;
 }
 
 .btn{
@@ -39,4 +39,9 @@
     text-align: center;
     margin-top: 30px;
     color: #FF0000;
+}
+
+.formErrorCreate{
+    color: #FF0000;
+    margin-top: 5px;
 }

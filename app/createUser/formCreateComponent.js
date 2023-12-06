@@ -63,17 +63,20 @@ export default function FormCreate() {
 
             <label className={styles.label} >Nome Completo:</label>
             <TextField {...register('name')} id="outlined-basic" label="Digite seu Nome..." variant="outlined" />
+            {errors?.name?.type === 'required' ? <p className={styles.formErrorCreate} >O nome é obrigatório</p> : null}
 
             <label className={styles.label} >E-mail:</label>
             <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
+            {errors?.email?.type === 'required' ? <p className={styles.formErrorCreate} >O e-mail é obrigatório</p> : null}
 
             <label className={styles.label} >Senha:</label>
             <TextField {...register('password')} id="outlined-basic" label="Digite uma Senha..." variant="outlined" />
+            {errors?.password?.type === 'typeError' ? <p className={styles.formErrorCreate} >A senha precisa ser numerica</p> : null}
 
             <label className={styles.label} >Confirme a Senha:</label>
             <TextField {...register('passwordwatch')} id="outlined-basic" label="Digite sua Senha Novamente..." variant="outlined" />
-            {errors?.passwordwatch?.type === 'typeError' ? <p>A senha precisa ser numerica</p> : null}
-            {errors?.passwordwatch?.type === 'validate' ? <p>A senha não é compativel</p> : null}
+            {errors?.passwordwatch?.type === 'typeError' ? <p className={styles.formErrorCreate} >A senha precisa ser numerica</p> : null}
+            {errors?.passwordwatch?.type === 'validate' ? <p className={styles.formErrorCreate} >A senha não é compativel</p> : null}
 
             {mutation.isError ? <p className={styles.errorCreate}>{mutation.error.message}</p> : null}
 
