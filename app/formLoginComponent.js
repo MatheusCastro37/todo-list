@@ -84,7 +84,7 @@ export default function FormLogin() {
                 <TextField {...register('password')} id="outlined-basic" label="Digite sua Senha" variant="outlined" />
                 {errors?.password?.type === "typeError" ? <p className={styles.errorForm}>*A senha precisa ser numerica</p> : null}
 
-                <input className={styles.btn} type='submit'/>
+                <button className={styles.btn} type='submit'>{mutation.isPending ? <CircularProgress className={styles.loadingMutation} /> : <>Enviar</>}</button>
                 <p className={styles.createUser}>Não possue conta?<Link className={styles.link} href='/createUser'>Criar Conta</Link></p>
                 
                 {mutation.isError ? <p className={styles.loginError}>{mutation.error.message}</p> : null}
