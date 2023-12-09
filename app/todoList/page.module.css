@@ -45,11 +45,13 @@
     border-radius: 50%;
 }
 
-.todoList li p{
+.todoList li p,
+.todoList li s{
     width: 100%;
 }
 
 .todoList li button svg{
+    color: aliceblue;
     width: 20px;
     height: 20px;
 }

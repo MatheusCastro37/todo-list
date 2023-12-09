@@ -1,16 +1,38 @@
 "use client"
 
+import { useState } from 'react';
+
 import styles from './page.module.css';
 
 import { queryClient } from '../layout';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { useQuery, useMutation } from '@tanstack/react-query';
 
 export default function TodoList() {
+
+    const [checked, setChecked] = useState(false)
+
+    const checkTodo = (e) => {
+
+        const btn = e.target.parentElement
+
+        if(!checked) {
+            
+            btn.style.backgroundColor = 'green'
+            setChecked(true)
+
+        } else {
+
+            btn.style.backgroundColor = 'transparent'
+            setChecked(false)
+
+        }
+        
+    }
 
     const { data, error, isPending, isError, isSuccess } = useQuery({
         queryKey: ['todos'],
@@ -74,8 +96,8 @@ export default function TodoList() {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <button><CheckCircleOutlineIcon/></button>
-                                    <p>{e.todo_name}</p>
+                                    <button onClick={checkTodo}><CheckCircleOutlineIcon/></button>
+                                    {checked ? <s>{e.todo_name}</s> : <p>{e.todo_name}</p>}
                                     <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
                             </>)
