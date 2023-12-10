@@ -96,7 +96,7 @@ export default function TodoList() {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <button onClick={checkTodo}><CheckCircleOutlineIcon/></button>
+                                    <button onClick={checkTodo}><CheckIcon/></button>
                                     {checked ? <s>{e.todo_name}</s> : <p>{e.todo_name}</p>}
                                     <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
