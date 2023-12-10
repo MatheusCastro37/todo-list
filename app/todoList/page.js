@@ -17,7 +17,6 @@ export default function TodoPage() {
         <main className={styles.container}>
             <section className={styles.firstLayer}>
                 <h1>ToDo List</h1>
-                <a href='#' className={styles.quit}>Sair</a>
             </section>
 
             <TodoList />

@@ -9,7 +9,7 @@
 .firstLayer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
 }
 
@@ -56,7 +56,6 @@
     height: 20px;
 }
 
-.quit,
 .todoList li button:last-child svg{
     color: #FF0000;
 }
