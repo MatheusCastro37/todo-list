@@ -1,7 +1,5 @@
 "use client"
 
-import { useState } from 'react';
-
 import styles from './page.module.css';
 
 import { queryClient } from '../layout';
@@ -14,22 +12,31 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 
 export default function TodoList() {
 
-    const [checked, setChecked] = useState(false)
+    const todoDone = (e) => {
 
-    const checkTodo = (e) => {
-
-        const btn = e.target.parentElement
-
-        if(!checked) {
-            
-            btn.style.backgroundColor = 'green'
-            setChecked(true)
+        const expectedBtn = e.target.parentElement
+        
+        if(expectedBtn.nodeName === 'svg') {
+            const btn = expectedBtn.parentElement
+        
+            if(btn.id === 'false') {
+                btn.style.backgroundColor = 'green'
+                btn.id = 'true'
+            } else {
+                btn.style.backgroundColor = 'transparent'
+                btn.id = 'false'
+            }
 
         } else {
 
-            btn.style.backgroundColor = 'transparent'
-            setChecked(false)
-
+            if(expectedBtn.id === 'false') {
+                expectedBtn.style.backgroundColor = 'green'
+                expectedBtn.id = 'true'
+            } else {
+                expectedBtn.style.backgroundColor = 'transparent'
+                expectedBtn.id = 'false'
+            }
+            
         }
         
     }
@@ -96,8 +103,8 @@ export default function TodoList() {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <button onClick={checkTodo}><CheckIcon/></button>
-                                    {checked ? <s>{e.todo_name}</s> : <p>{e.todo_name}</p>}
+                                    <button id='false' onClick={todoDone}><CheckIcon/></button>
+                                    <p>{e.todo_name}</p>
                                     <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
                             </>)
