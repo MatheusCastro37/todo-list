@@ -36,8 +36,15 @@
 .todoList button{
     display: flex;
     border: none;
-    background: transparent;
     margin: 0 10px;
+}
+
+.true{
+    background-color: green;
+}
+
+.false{
+    background-color: transparent;
 }
 
 .todoList button:first-child{
@@ -54,6 +61,10 @@
     color: aliceblue;
     width: 20px;
     height: 20px;
+}
+
+.todoList li button:last-child{
+    background-color: transparent;
 }
 
 .todoList li button:last-child svg{

@@ -103,7 +103,7 @@ export default function TodoList() {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <button id='false' onClick={todoDone}><CheckIcon/></button>
+                                    <button id={`${e.todo_check}`} className={styles[`${e.todo_check}`]} onClick={todoDone}><CheckIcon/></button>
                                     <p>{e.todo_name}</p>
                                     <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
