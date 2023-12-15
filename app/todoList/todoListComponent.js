@@ -18,6 +18,8 @@ export default function TodoList() {
         
         if(expectedBtn.nodeName === 'svg') {
             const btn = expectedBtn.parentElement
+            const todoID = btn.classList[1]
+            mutationPatch.mutate(todoID)
         
             if(btn.id === 'false') {
                 btn.style.backgroundColor = 'green'
@@ -28,6 +30,9 @@ export default function TodoList() {
             }
 
         } else {
+            const todoID = expectedBtn.classList[1]
+
+            mutationPatch.mutate(todoID)
 
             if(expectedBtn.id === 'false') {
                 expectedBtn.style.backgroundColor = 'green'
@@ -57,7 +62,7 @@ export default function TodoList() {
         }
     })
 
-    const mutation = useMutation({
+    const mutationDelete = useMutation({
         mutationFn: async (todoID) => {
             const res = await fetch('https://api-todo-nodejs.onrender.com/todoList', {
                 method: 'delete',
@@ -65,6 +70,7 @@ export default function TodoList() {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify(todoID)
             })
 
@@ -78,12 +84,33 @@ export default function TodoList() {
         }
     })
 
+    const mutationPatch = useMutation({
+        mutationFn: async (todoID) => {
+            
+            const res = await fetch('https://api-todo-nodejs.onrender.com/todoList', {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(todoID)
+            })
+
+            if(res.ok) {
+                queryClient.invalidateQueries({ queryKey: ['todos'] })
+            } else {
+                throw new Error('falha')
+            }
+        }
+    })
+
     const deleteTodo = (e) => {
 
         const btnDelete = e.target.parentElement.parentElement
         const todoID = btnDelete.id
 
-        mutation.mutate(todoID)
+        mutationDelete.mutate(todoID)
 
     }
 
@@ -103,7 +130,7 @@ export default function TodoList() {
                         data.map(e => {
                             return(<>
                                 <li>
-                                    <button id={`${e.todo_check}`} className={styles[`${e.todo_check}`]} onClick={todoDone}><CheckIcon/></button>
+                                    <button id={`${e.todo_check}`} className={`${styles[`${e.todo_check}`]} ${e.todo_id}`} onClick={todoDone}><CheckIcon/></button>
                                     <p>{e.todo_name}</p>
                                     <button className='deleteBtn' id={e.todo_id} onClick={deleteTodo}><DeleteIcon/></button>
                                 </li>
