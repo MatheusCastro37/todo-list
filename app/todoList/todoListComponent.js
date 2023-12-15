@@ -98,7 +98,7 @@ export default function TodoList() {
             })
 
             if(res.ok) {
-                queryClient.invalidateQueries({ queryKey: ['todos'] })
+                return
             } else {
                 throw new Error('falha')
             }
