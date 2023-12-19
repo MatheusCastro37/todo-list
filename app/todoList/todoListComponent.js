@@ -106,13 +106,17 @@ export default function TodoList() {
     })
 
     const deleteTodo = (e) => {
+        const btnDelete = e.target.parentElement.parentElement;
+        console.log(btnDelete.nodeName);
 
-        const btnDelete = e.target.parentElement.parentElement
-        const todoID = btnDelete.id
+        if (btnDelete.nodeName === "LI") {
+            const todoID = btnDelete.lastElementChild.id;
+            mutationDelete.mutate(todoID);
+        }
 
-        mutationDelete.mutate(todoID)
-
-    }
+        const todoID = btnDelete.id;
+        mutationDelete.mutate(todoID);
+    };
 
     return(<>
 
