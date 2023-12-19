@@ -9,8 +9,17 @@
 .firstLayer{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 30px;
+}
+
+.firstLayer > button{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: red;
+    font-size: 1.1em;
+    text-decoration: underline;
 }
 
 .todoList{
