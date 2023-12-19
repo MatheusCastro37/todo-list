@@ -1,6 +1,7 @@
 import styles from './page.module.css';
 import TodoList from './todoListComponent';
 import Modal from './modalComponent';
+import BtnLogOff from './btnLogOffComponent';
 
 export const metadata = {
     title: 'Lista de Tarefas',
@@ -17,6 +18,7 @@ export default function TodoPage() {
         <main className={styles.container}>
             <section className={styles.firstLayer}>
                 <h1>ToDo List</h1>
+                <BtnLogOff />
             </section>
 
             <TodoList />
