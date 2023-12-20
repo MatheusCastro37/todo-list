@@ -66,6 +66,7 @@ export default function FormCreate() {
             {errors?.name?.type === 'required' ? <p className={styles.formErrorCreate} >O nome é obrigatório</p> : null}
 
             <label className={styles.label} >E-mail:</label>
+            <p>(Por Favor, não utilize um e-mail valido, esta aplicação é somente para demonstração.)</p>
             <TextField {...register('email')} id="outlined-basic" label="Digite seu E-mail..." variant="outlined" />
             {errors?.email?.type === 'required' ? <p className={styles.formErrorCreate} >O e-mail é obrigatório</p> : null}
 
