@@ -71,11 +71,11 @@ export default function FormCreate() {
             {errors?.email?.type === 'required' ? <p className={styles.formErrorCreate} >O e-mail é obrigatório</p> : null}
 
             <label className={styles.label} >Senha:</label>
-            <TextField {...register('password')} id="outlined-basic" label="Digite uma Senha..." variant="outlined" />
+            <TextField {...register('password')} type="password" id="outlined-basic" label="Digite uma Senha..." variant="outlined" />
             {errors?.password?.type === 'typeError' ? <p className={styles.formErrorCreate} >A senha precisa ser numerica</p> : null}
 
             <label className={styles.label} >Confirme a Senha:</label>
-            <TextField {...register('passwordwatch')} id="outlined-basic" label="Digite sua Senha Novamente..." variant="outlined" />
+            <TextField {...register('passwordwatch')} type="password" id="outlined-basic" label="Digite sua Senha Novamente..." variant="outlined" />
             {errors?.passwordwatch?.type === 'typeError' ? <p className={styles.formErrorCreate} >A senha precisa ser numerica</p> : null}
             {errors?.passwordwatch?.type === 'validate' ? <p className={styles.formErrorCreate} >A senha não é compativel</p> : null}
 
